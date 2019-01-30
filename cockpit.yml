@@ -1,0 +1,74 @@
+---
+- name: Install and configure cockpit
+  hosts: all
+  become: yes
+  vars:
+
+  tasks:
+
+    - name: Install cockpit packages
+      yum:
+        name: "{{ packages }}"
+        state: latest
+      vars:
+        packages:
+        - cockpit
+        - cockpit-bridge
+        - cockpit-packagekit
+        - cockpit-ws
+        - cockpit-composer
+        - cockpit-pcp
+        - cockpit-doc
+        - cockpit-session-recording
+        - cockpit-machines
+        - subscription-manager-cockpit
+        - cockpit-system
+        - cockpit-storaged
+
+    - name: Install dashboard on head node
+      yum:
+        name: cockpit-dashboard
+        state: latest
+      when: ansible_hostname == 'head'
+
+    - name: add nodes to cockpit-dashboard on head
+      template:
+        src: templates/cockpit-machine.json.j2
+        dest: /etc/cockpit/machines.d/{{ ansible_hostname }}.json
+        owner: root
+        group: root
+        mode: 0644
+      when: ansible_hostname != 'head'
+      delegate_to: head
+
+    - name: add node keys to head known_hosts
+      lineinfile:
+        dest: /var/lib/cockpit/known_hosts 
+        create: yes
+        state: present
+        line: "{{ lookup('pipe', 'ssh-keyscan -t ed25519 ' + hostvars[item]['ansible_facts']['enp0s8']['ipv4']['address']) }}"
+      with_items: "{{ groups.nodes }}"
+      when: ansible_hostname != 'head'
+      delegate_to: head
+        
+    - name: Start firewall
+      service:
+        name: firewalld
+        state: started
+        enabled: true
+
+    - name: Configure firewall
+      firewalld:
+        port: "{{ item }}"
+        permanent: true
+        immediate: true
+        state: enabled 
+      with_items:
+        - 9090/tcp
+
+    - name: Start cockpit
+      service:
+        name: cockpit
+        state: started
+
+       
