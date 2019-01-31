@@ -18,7 +18,6 @@
         - cockpit-ws
         - cockpit-composer
         - cockpit-pcp
-        - cockpit-doc
         - cockpit-session-recording
         - cockpit-machines
         - subscription-manager-cockpit
