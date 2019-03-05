@@ -6,4 +6,4 @@ Hosts must be registered first using `subscription-manager`. [`cockpit.yml`](htt
 
 This allows for management of all hosts from a single interface.
 
-![Cockpit screenshot](https://raw.githubusercontent.com/cloin/ansible-cockpit/master/cockpit-screenshot.png)
+![Cockpit screenshot](https://github.com/cloin/ansible-cockpit/blob/dev/cockpit-dashboard.png?raw=true)
