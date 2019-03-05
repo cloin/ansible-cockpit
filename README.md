@@ -6,4 +6,7 @@ Hosts must be registered first using [`subscription-manager`](https://docs.ansib
 
 **This allows for management of all hosts from a single interface!**
 
+The firewall rule for tcp/9090 only needs to be added on the master where `cockpit-dashboard` is installed. Metrics and management of the other nodes are done through `ssh` so `cockpit.socket` doesn't need to be enabled/started on the nodes group.
+
 ![Cockpit screenshot](https://github.com/cloin/ansible-cockpit/blob/dev/cockpit-dashboard.png?raw=true)
+
