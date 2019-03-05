@@ -1,10 +1,10 @@
 ---
- - name: Install dashboard on head node
+ - name: Install dashboard on master node
    yum:
      name: cockpit-dashboard
      state: latest
      
- - name: add nodes to cockpit-dashboard on head
+ - name: add nodes to cockpit-dashboard on master
    template:
      src: templates/cockpit-machine.json.j2
      dest: /etc/cockpit/machines.d/{{ hostvars[item]['ansible_hostname'] }}.json
@@ -13,7 +13,7 @@
      mode: 0644 
    with_items: "{{ groups.nodes }}"
 
- - name: add node keys to head known_hosts
+ - name: add node keys to master known_hosts
    lineinfile:
      dest: /var/lib/cockpit/known_hosts 
      create: yes
