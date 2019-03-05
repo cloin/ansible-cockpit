@@ -1,23 +1,18 @@
 ---
-- name: Common tasks for all Cockpit nodes
-  hosts: all
-  become: yes
-  tasks:
-
-  - name: Install cockpit packages
-    yum:
-      name: "{{ packages }}"
-        state: latest
-      vars:
-        packages:
-        - cockpit
-        - cockpit-bridge
-        - cockpit-packagekit
-        - cockpit-ws
-        - cockpit-composer
-        - cockpit-pcp
-        - cockpit-session-recording
-        - cockpit-machines
-        - subscription-manager-cockpit
-        - cockpit-system
-        - cockpit-storaged
+- name: Install packages needed for all nodes 
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - cockpit
+    - cockpit-bridge
+    - cockpit-packagekit
+    - cockpit-ws
+    - cockpit-composer
+    - cockpit-pcp
+    - cockpit-session-recording
+    - cockpit-machines
+    - subscription-manager-cockpit
+    - cockpit-system
+    - cockpit-storaged
