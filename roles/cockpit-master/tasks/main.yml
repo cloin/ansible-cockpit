@@ -3,6 +3,8 @@
    yum:
      name: cockpit-dashboard
      state: latest
+   tags:
+   - packages
      
  - name: add nodes to cockpit-dashboard on master
    template:

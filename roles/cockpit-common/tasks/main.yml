@@ -11,11 +11,11 @@
     - cockpit-ws
     - cockpit-composer
     - cockpit-pcp
-    - cockpit-session-recording
-    - cockpit-machines
     - subscription-manager-cockpit
     - cockpit-system
     - cockpit-storaged
+  tags:
+  - packages
 
 - name: Config Cockpit motd
   copy:
