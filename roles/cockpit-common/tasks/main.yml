@@ -1,4 +1,15 @@
 ---
+- name: Enable repos for RHEL 7
+  command: "{{ item }}" 
+  loop:
+    - subscription-manager repos --enable=rhel-7-server-extras-rpms
+    - subscription-manager repos --enable=rhel-7-server-optional-rpms
+  when:
+    - ansible_facts['distribution'] == 'RedHat'
+    - ansible_facts['distribution_major_version'] == '7'
+  tags:
+  - packages
+
 - name: Install packages needed for all nodes 
   yum:
     name: "{{ packages }}"
