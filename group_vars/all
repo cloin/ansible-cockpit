@@ -1,0 +1,2 @@
+# interface with private IP to access Cockpit interface, get pubkey for known_hosts, etc.
+default_interface: enp0s8
