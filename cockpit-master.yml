@@ -1,5 +1,5 @@
 ---
-- hosts: master
+- hosts: masters
   become: yes
   roles:
     - cockpit-master
