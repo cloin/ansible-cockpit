@@ -18,9 +18,9 @@
     packages:
     - cockpit
     - cockpit-bridge
-    - cockpit-packagekit
+    #- cockpit-packagekit
     - cockpit-ws
-    - cockpit-composer
+    #- cockpit-composer
     - cockpit-pcp
     - subscription-manager-cockpit
     - cockpit-system
